@@ -1,0 +1,84 @@
+/* Wofi Style - Catppuccin Mocha Theme */
+
+/* Main window */
+window {
+    margin: 0px;
+    border: 2px solid #89b4fa;
+    border-radius: 15px;
+    background-color: rgba(30, 30, 46, 0.95);
+    font-family: "JetBrains Mono Nerd Font";
+    font-size: 14px;
+}
+
+/* Search box */
+#input {
+    margin: 10px;
+    padding: 12px 20px;
+    border: 2px solid #45475a;
+    border-radius: 10px;
+    background-color: #1e1e2e;
+    color: #cdd6f4;
+    font-size: 16px;
+}
+
+#input:focus {
+    border: 2px solid #89b4fa;
+    outline: none;
+}
+
+#input placeholder {
+    color: #6c7086;
+}
+
+/* Results container */
+#inner-box {
+    margin: 5px;
+    padding: 5px;
+    border: none;
+    background-color: transparent;
+}
+
+/* Scrollbar */
+#scroll {
+    margin: 0px;
+    padding: 0px;
+}
+
+/* Individual entries */
+#entry {
+    margin: 4px 10px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    background-color: transparent;
+    color: #cdd6f4;
+    transition: all 0.2s ease;
+}
+
+#entry:hover {
+    background-color: #313244;
+}
+
+#entry:selected {
+    background: linear-gradient(90deg, #89b4fa 0%, #cba6f7 100%);
+    color: #1e1e2e;
+    font-weight: bold;
+}
+
+/* Entry icon */
+#entry image {
+    margin-right: 10px;
+    padding: 0px;
+}
+
+/* Entry text */
+#entry label {
+    color: inherit;
+}
+
+/* No results */
+#text {
+    margin: 20px;
+    padding: 10px;
+    color: #f38ba8;
+}

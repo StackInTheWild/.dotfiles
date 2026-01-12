@@ -75,6 +75,17 @@ if ! command -v yay &> /dev/null; then
     cd ~
 fi
 
+# Optional: Install Rofi (Wayland version) as alternative launcher
+echo "======================================"
+echo "App Launcher Selection"
+echo "======================================"
+echo "Wofi is installed by default. You can also install Rofi for more features."
+read -p "Install Rofi (Wayland) as well? [y/N]: " install_rofi
+if [[ $install_rofi =~ ^[Yy]$ ]]; then
+    echo "Installing Rofi (Wayland)..."
+    yay -S --noconfirm rofi-lbonn-wayland-git
+fi
+
 echo "======================================"
 echo "Setting up configuration files"
 echo "======================================"
@@ -90,6 +101,17 @@ mkdir -p ~/Pictures/Screenshots
 # Copy Hyprland configs
 echo "Copying Hyprland configuration files..."
 cp -r hypr/* ~/.config/hypr/
+
+# Copy Wofi configs
+echo "Copying Wofi configuration files..."
+cp -r wofi/* ~/.config/wofi/
+
+# Copy Rofi configs if Rofi was installed
+if command -v rofi &> /dev/null; then
+    echo "Copying Rofi configuration files..."
+    mkdir -p ~/.config/rofi
+    cp -r rofi/* ~/.config/rofi/
+fi
 
 # Enable NetworkManager service
 echo "Enabling NetworkManager..."
@@ -270,15 +292,24 @@ echo "  2. At the login screen, select Hyprland"
 echo "  Or run: Hyprland"
 echo ""
 echo "Key bindings (SUPER = Windows/Command key):"
-echo "  SUPER + RETURN    - Open terminal"
-echo "  SUPER + D         - Application launcher"
+echo "  SUPER + RETURN    - Open terminal (Kitty)"
+echo "  SUPER + D         - Application launcher (Wofi)"
 echo "  SUPER + Q         - Close window"
-echo "  SUPER + L         - Lock screen"
+echo "  SUPER + L         - Lock screen (Hyprlock)"
 echo "  SUPER + M         - Exit Hyprland"
-echo "  SUPER + E         - File manager"
+echo "  SUPER + E         - File manager (Thunar)"
 echo "  SUPER + S         - Screenshot (select area)"
+echo ""
+echo "App Launchers installed:"
+echo "  • Wofi - Beautiful, lightweight launcher (default)"
+if command -v rofi &> /dev/null; then
+    echo "  • Rofi - Feature-rich launcher with window switcher"
+    echo "    To use Rofi, edit ~/.config/hypr/hyprland.conf"
+    echo "    Change: \$menu = rofi -show drun"
+fi
 echo ""
 echo "Don't forget to:"
 echo "  1. Add a wallpaper to ~/Pictures/Wallpapers/wallpaper.jpg"
 echo "  2. Configure your monitors in ~/.config/hypr/hyprland.conf"
-echo "  3. Customize other settings as needed"
+echo "  3. Customize colors and themes in each config directory"
+echo "  4. Check out the README files in hypr/, wofi/, and rofi/ directories"

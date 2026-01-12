@@ -1,0 +1,29 @@
+# Wofi Configuration
+
+# Window dimensions
+width=600
+height=400
+
+# Display mode
+show=drun
+allow_images=true
+image_size=32
+
+# Position
+location=center
+x=0
+y=0
+
+# Behavior
+allow_markup=true
+no_actions=true
+halign=fill
+orientation=vertical
+content_halign=fill
+insensitive=true
+parse_search=false
+hide_scroll=true
+matching=contains
+
+# Prompt
+prompt=Search...
