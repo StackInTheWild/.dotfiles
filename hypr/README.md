@@ -4,9 +4,18 @@ This directory contains configuration files for Hyprland and its ecosystem on Ar
 
 ## Files
 
+### Core Configuration
 - `hyprland.conf` - Main Hyprland configuration
 - `hypridle.conf` - Idle management configuration
 - `hyprlock.conf` - Lock screen configuration
+
+### Screensaver & Wallpapers
+- `hyprlock-screensaver.conf` - Screensaver-style lock screen
+- `hypridle-screensaver.conf` - Idle management with screensaver mode
+- `screensaver.sh` - Multi-mode screensaver launcher script
+- `start-animated-wallpaper.sh` - Animated wallpaper startup script
+- `mpvpaper.conf` - Animated wallpaper configuration notes
+- `SCREENSAVER.md` - Comprehensive screensaver documentation
 
 ## Installation
 

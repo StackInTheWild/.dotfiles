@@ -86,6 +86,29 @@ if [[ $install_rofi =~ ^[Yy]$ ]]; then
     yay -S --noconfirm rofi-lbonn-wayland-git
 fi
 
+# Optional: Install screensaver packages
+echo ""
+echo "======================================"
+echo "Screensaver Options"
+echo "======================================"
+echo "Hyprlock provides a beautiful lock screen with clock screensaver."
+echo "Additional screensaver options available:"
+echo "  • Animated wallpapers (mpvpaper) - Video wallpapers"
+echo "  • Terminal screensavers (cmatrix, pipes.sh, etc.)"
+echo ""
+read -p "Install animated wallpaper support (mpvpaper)? [y/N]: " install_mpvpaper
+if [[ $install_mpvpaper =~ ^[Yy]$ ]]; then
+    echo "Installing mpvpaper..."
+    yay -S --noconfirm mpvpaper
+fi
+
+read -p "Install terminal screensavers (cmatrix, pipes.sh)? [y/N]: " install_term_screensavers
+if [[ $install_term_screensavers =~ ^[Yy]$ ]]; then
+    echo "Installing terminal screensavers..."
+    sudo pacman -S --noconfirm cmatrix
+    yay -S --noconfirm pipes.sh
+fi
+
 echo "======================================"
 echo "Setting up configuration files"
 echo "======================================"
@@ -101,6 +124,13 @@ mkdir -p ~/Pictures/Screenshots
 # Copy Hyprland configs
 echo "Copying Hyprland configuration files..."
 cp -r hypr/* ~/.config/hypr/
+
+# Make screensaver scripts executable
+chmod +x ~/.config/hypr/screensaver.sh 2>/dev/null || true
+chmod +x ~/.config/hypr/start-animated-wallpaper.sh 2>/dev/null || true
+
+# Create Videos/Wallpapers directory for animated wallpapers
+mkdir -p ~/Videos/Wallpapers
 
 # Copy Wofi configs
 echo "Copying Wofi configuration files..."
@@ -308,8 +338,25 @@ if command -v rofi &> /dev/null; then
     echo "    Change: \$menu = rofi -show drun"
 fi
 echo ""
+echo "Screensaver & Lock Screen:"
+echo "  • Hyprlock - Beautiful lock screen with clock (default)"
+echo "  • Hypridle - Automatic lock after idle time"
+if command -v mpvpaper &> /dev/null; then
+    echo "  • MPVPaper - Animated video wallpapers"
+    echo "    Add videos to ~/Videos/Wallpapers/ and run:"
+    echo "    ~/.config/hypr/start-animated-wallpaper.sh"
+fi
+if command -v cmatrix &> /dev/null; then
+    echo "  • Terminal screensavers - Matrix, pipes, etc."
+    echo "    Usage: ~/.config/hypr/screensaver.sh <mode>"
+    echo "    Modes: clock, matrix, pipes, starfield, blank, video"
+fi
+echo ""
 echo "Don't forget to:"
 echo "  1. Add a wallpaper to ~/Pictures/Wallpapers/wallpaper.jpg"
 echo "  2. Configure your monitors in ~/.config/hypr/hyprland.conf"
 echo "  3. Customize colors and themes in each config directory"
 echo "  4. Check out the README files in hypr/, wofi/, and rofi/ directories"
+if command -v mpvpaper &> /dev/null; then
+    echo "  5. Add video wallpapers to ~/Videos/Wallpapers/ (optional)"
+fi
