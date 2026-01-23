@@ -1,0 +1,348 @@
+" ============================================================================
+" JetBrains Rider IdeaVim Configuration
+" Mirrors Neovim configuration from ~/.dotfiles/nvim
+" ============================================================================
+
+" Set leader key to Space (matching Neovim)
+let mapleader = " "
+
+" ============================================================================
+" Essential IdeaVim Settings
+" ============================================================================
+
+" Enable relative line numbers (matching vim.opt.relativenumber)
+set relativenumber
+set number
+
+" Tab settings (matching Neovim: 4 spaces)
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+
+" Smart indent
+set smartindent
+
+" Search settings (matching hlsearch=false, incsearch=true)
+set nohlsearch
+set incsearch
+
+" Scrolling settings (matching scrolloff=8)
+set scrolloff=8
+
+" Visual selection stays when indenting
+set idearefinemode=keep
+
+" Enable system clipboard integration
+set clipboard+=unnamed
+set clipboard+=ideaput
+
+" Show current vim mode in status bar
+set showmode
+
+" ============================================================================
+" IdeaVim Extensions (enable IDE features in vim mode)
+" ============================================================================
+
+" Emulates vim-surround for surrounding text objects
+set surround
+
+" Emulates vim-commentary for commenting
+set commentary
+
+" Emulates vim-highlightedyank to show what was yanked
+set highlightedyank
+
+" Multiple cursors support (like vim-visual-multi)
+set multiple-cursors
+
+" Enable which-key style command menu
+set which-key
+set notimeout
+
+" Enable exchange for swapping text regions
+set exchange
+
+" Enable easymotion for quick navigation
+set easymotion
+
+" Enable text objects for arguments
+set argtextobj
+
+" ============================================================================
+" Navigation Mappings
+" ============================================================================
+
+" File explorer (matching <leader>pv in Neovim)
+nnoremap <leader>pv :action ActivateProjectToolWindow<CR>
+
+" Find files (matching Telescope find_files)
+nnoremap <leader>pf :action GotoFile<CR>
+
+" Git files (matching Telescope git_files with Ctrl-P)
+nnoremap <C-p> :action GotoFile<CR>
+
+" Search in project (matching Telescope grep_string)
+nnoremap <leader>ps :action FindInPath<CR>
+
+" Recent files
+nnoremap <leader>pr :action RecentFiles<CR>
+
+" Search everywhere
+nnoremap <leader>pa :action SearchEverywhere<CR>
+
+" ============================================================================
+" LSP-like Mappings (matching Neovim LSP configuration)
+" ============================================================================
+
+" Go to definition (matching gd)
+nnoremap gd :action GotoDeclaration<CR>
+
+" Hover documentation (matching K)
+nnoremap K :action ShowHoverInfo<CR>
+
+" Go to implementation
+nnoremap gi :action GotoImplementation<CR>
+
+" Go to type definition
+nnoremap gy :action GotoTypeDeclaration<CR>
+
+" Find usages/references (matching <leader>vrr)
+nnoremap <leader>vrr :action FindUsages<CR>
+nnoremap gr :action FindUsages<CR>
+
+" Rename symbol (matching <leader>vrn)
+nnoremap <leader>vrn :action RenameElement<CR>
+
+" Code actions (matching <leader>vca)
+nnoremap <leader>vca :action ShowIntentionActions<CR>
+
+" Show error description (matching <leader>vd)
+nnoremap <leader>vd :action ShowErrorDescription<CR>
+
+" Next/previous error (matching [d and ]d)
+nnoremap [d :action GotoPreviousError<CR>
+nnoremap ]d :action GotoNextError<CR>
+
+" Workspace symbols (matching <leader>vws)
+nnoremap <leader>vws :action GotoSymbol<CR>
+
+" Format code (matching <leader>f)
+nnoremap <leader>f :action ReformatCode<CR>
+
+" ============================================================================
+" Window Management (matching Neovim window commands)
+" ============================================================================
+
+" Close window (matching <leader>wq)
+nnoremap <leader>wq :action CloseContent<CR>
+
+" Split windows
+nnoremap <leader>wv :action SplitVertically<CR>
+nnoremap <leader>wh :action SplitHorizontally<CR>
+
+" Navigate between splits
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+
+" ============================================================================
+" Buffer/Tab Management
+" ============================================================================
+
+" Next/previous tab
+nnoremap <leader>bn :action NextTab<CR>
+nnoremap <leader>bp :action PreviousTab<CR>
+
+" Close buffer
+nnoremap <leader>bd :action CloseContent<CR>
+
+" ============================================================================
+" Git Integration (matching vim-fugitive and lazygit)
+" ============================================================================
+
+" Git status/commit window
+nnoremap <leader>gg :action ActivateCommitToolWindow<CR>
+
+" Git blame
+nnoremap <leader>gb :action Annotate<CR>
+
+" Git diff
+nnoremap <leader>gd :action Compare.SameVersion<CR>
+
+" Git log
+nnoremap <leader>gl :action Vcs.Show.Log<CR>
+
+" ============================================================================
+" Quick Navigation & Editing (matching Neovim custom remaps)
+" ============================================================================
+
+" Move visual selection up/down (matching visual J/K in Neovim)
+vnoremap J :action MoveLineDown<CR>
+vnoremap K :action MoveLineUp<CR>
+
+" Keep cursor centered when scrolling (matching <C-d>zz and <C-u>zz)
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+
+" Keep cursor centered when searching (matching nzzzv and Nzzzv)
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+" Join lines without moving cursor (matching J remap)
+nnoremap J mzJ`z
+
+" ============================================================================
+" Clipboard Operations (matching Neovim clipboard remaps)
+" ============================================================================
+
+" Yank to system clipboard (matching <leader>y and <leader>Y)
+vnoremap <leader>y "+y
+nnoremap <leader>Y "+Y
+nnoremap <leader>y "+y
+
+" Delete to black hole register (matching <leader>d)
+vnoremap <leader>d "_d
+nnoremap <leader>d "_d
+
+" Paste without yanking in visual mode (matching <leader>p)
+xnoremap <leader>p "_dP
+
+" ============================================================================
+" Search and Replace (matching <leader>s in Neovim)
+" ============================================================================
+
+" Search and replace word under cursor
+nnoremap <leader>s :action FindInPath<CR>
+
+" ============================================================================
+" QuickFix & Location List Navigation (matching <C-k>, <C-j>, etc.)
+" ============================================================================
+
+" QuickFix navigation - using Problems tool window as equivalent
+" Note: Rider doesn't have exact quickfix, using error navigation instead
+nnoremap <C-k> :action GotoNextError<CR>zz
+nnoremap <C-j> :action GotoPreviousError<CR>zz
+
+" ============================================================================
+" Terminal (matching nvterm)
+" ============================================================================
+
+" Open terminal
+nnoremap <leader>tt :action ActivateTerminalToolWindow<CR>
+
+" ============================================================================
+" File Tree (matching nvim-tree)
+" ============================================================================
+
+" Toggle file tree
+nnoremap <leader>e :action ActivateProjectToolWindow<CR>
+
+" ============================================================================
+" Refactoring
+" ============================================================================
+
+" Extract variable
+vnoremap <leader>rv :action IntroduceVariable<CR>
+
+" Extract method
+vnoremap <leader>rm :action ExtractMethod<CR>
+
+" Inline variable
+nnoremap <leader>ri :action Inline<CR>
+
+" Change signature
+nnoremap <leader>rs :action ChangeSignature<CR>
+
+" ============================================================================
+" Building & Running
+" ============================================================================
+
+" Build project
+nnoremap <leader>bb :action Build<CR>
+
+" Run
+nnoremap <leader>rr :action Run<CR>
+
+" Debug
+nnoremap <leader>dd :action Debug<CR>
+
+" Stop
+nnoremap <leader>ss :action Stop<CR>
+
+" Run tests
+nnoremap <leader>tr :action RunClass<CR>
+
+" ============================================================================
+" Miscellaneous
+" ============================================================================
+
+" Escape alternative (matching <C-c> to Esc in Neovim)
+inoremap <C-c> <Esc>
+
+" Disable Q (matching Q to nop in Neovim)
+nnoremap Q <Nop>
+
+" Toggle zen mode / distraction free mode (matching zen-mode plugin)
+nnoremap <leader>z :action ToggleDistractionFreeMode<CR>
+
+" Undo tree (matching undotree)
+nnoremap <leader>u :action LocalHistory.ShowHistory<CR>
+
+" Structure view (code outline)
+nnoremap <leader>o :action FileStructurePopup<CR>
+
+" Open settings
+nnoremap <leader>, :action ShowSettings<CR>
+
+" Reload IdeaVim configuration
+nnoremap <leader><leader> :source ~/.ideavimrc<CR>
+
+" ============================================================================
+" Notes:
+" ============================================================================
+"
+" To complete the Rider setup to match your Neovim config:
+"
+" 1. Install the IdeaVim plugin in Rider:
+"    - File > Settings > Plugins > search for "IdeaVim" > Install
+"
+" 2. Install additional plugins for better integration:
+"    - Which-Key (for command discovery)
+"    - Key Promoter X (to learn IDE shortcuts)
+"
+" 3. Editor Settings to match your Neovim (File > Settings > Editor):
+"    - General > Appearance:
+"      ☑ Show line numbers
+"      ☑ Show relative line numbers (if available)
+"
+"    - General > Code Folding:
+"      ☑ Show code folding outline
+"
+"    - Code Style > General:
+"      - Tab size: 4
+"      - Indent: 4
+"      - ☑ Use tab character: OFF (use spaces)
+"
+"    - General > Editor Tabs:
+"      - Tab placement: Top
+"      - ☑ Show tabs in one row
+"
+"    - General > Appearance:
+"      - Right margin (columns): 120
+"
+" 4. Color Scheme:
+"    - Your Neovim uses Rose Pine theme
+"    - Install a Rose Pine theme plugin for JetBrains IDEs if available
+"    - Or choose a similar dark theme from Settings > Editor > Color Scheme
+"
+" 5. For Git integration:
+"    - Rider has excellent built-in Git support
+"    - The key mappings above integrate with Rider's Git tools
+"
+" 6. LSP/IntelliSense:
+"    - Rider has superior C# language support built-in
+"    - The mappings above use Rider's native refactoring tools
+"
+" ============================================================================
